@@ -62,8 +62,15 @@ if test "${#pr_states[@]}" -gt 0; then
 fi
 
 state_id="$(printf '%s\n' "${state_parts[@]}" | shasum -a 256 | awk '{print substr($1, 1, 12)}')"
-build_version="0.0.0-SNAPSHOT-${state_id}"
 release_tag="${RELEASE_PREFIX}-${state_id}"
+
+build_version_suffix=''
+if test "${#selected_prs[@]}" -gt 0; then
+    for pr in "${selected_prs[@]}"; do
+        build_version_suffix="${build_version_suffix}+PR${pr}"
+    done
+fi
+build_version="0.0.0-SNAPSHOT${build_version_suffix}"
 
 if gh release view "$release_tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
     echo "Release $release_tag already exists for this composite state."
