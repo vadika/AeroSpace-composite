@@ -52,6 +52,21 @@ Download:
 - the zip asset directly from Releases
 - or the generated cask file and install it with Homebrew:
 
+Current tested release:
+
+```bash
+brew uninstall --cask aerospace aerospace-dev 2>/dev/null || true
+brew install --cask https://github.com/vadika/AeroSpace-composite/releases/download/aerospace-testing-d7188a95bf7f/aerospace-composite.rb
+```
+
+Release page:
+
+```bash
+https://github.com/vadika/AeroSpace-composite/releases/tag/aerospace-testing-d7188a95bf7f
+```
+
+If you already downloaded cask locally:
+
 ```bash
 brew install --cask ./aerospace-composite.rb
 ```
