@@ -19,6 +19,9 @@ source "$CONFIG_FILE"
 : "${CASK_NAME:?CASK_NAME is required}"
 : "${GITHUB_REPOSITORY:?GITHUB_REPOSITORY is required}"
 
+# Empty bash arrays and `set -u` are not portable enough across environments.
+set +u
+
 mkdir -p "$WORK_DIR"
 rm -rf "$WORK_DIR/source" "$WORK_DIR/out"
 
@@ -31,9 +34,7 @@ main_short="$(git rev-parse --short=12 HEAD)"
 
 declare -a selected_prs=()
 if declare -p SELECTED_PRS >/dev/null 2>&1; then
-    set +u
     selected_prs=("${SELECTED_PRS[@]}")
-    set -u
 fi
 declare -a pr_states=()
 declare -a pr_notes=()
