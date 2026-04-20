@@ -31,7 +31,9 @@ main_short="$(git rev-parse --short=12 HEAD)"
 
 declare -a selected_prs=()
 if declare -p SELECTED_PRS >/dev/null 2>&1; then
+    set +u
     selected_prs=("${SELECTED_PRS[@]}")
+    set -u
 fi
 declare -a pr_states=()
 declare -a pr_notes=()
