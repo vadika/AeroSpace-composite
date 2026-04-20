@@ -29,6 +29,9 @@ git clone --filter=blob:none --branch "$UPSTREAM_BRANCH" "$UPSTREAM_REPO" "$WORK
 
 cd "$WORK_DIR/source"
 
+git config user.name "AeroSpace Composite Bot"
+git config user.email "actions@users.noreply.github.com"
+
 main_sha="$(git rev-parse HEAD)"
 main_short="$(git rev-parse --short=12 HEAD)"
 
@@ -45,7 +48,12 @@ for pr in "${selected_prs[@]}"; do
     pr_short="$(git rev-parse --short=12 "$pr_sha")"
     pr_states+=("pr${pr}-${pr_short}")
     pr_notes+=("PR #$pr @ $pr_sha")
-    git cherry-pick "$pr_sha"
+
+    if ! git merge --no-edit --no-ff "refs/remotes/origin/pr/$pr"; then
+        echo "Failed to merge PR #$pr into composite build state." >&2
+        echo "The PR may no longer apply cleanly on top of the current composite state." >&2
+        exit 1
+    fi
 done
 
 state_parts=("main-${main_short}")
