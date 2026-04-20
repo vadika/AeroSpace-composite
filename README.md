@@ -13,7 +13,7 @@ Each distinct source state gets its own GitHub release with:
 
 ## How it works
 
-The GitHub Actions workflow polls upstream on a schedule and also runs on changes to this repository.
+The GitHub Actions workflow polls upstream once per day and also runs on changes to this repository.
 
 On each run it:
 
