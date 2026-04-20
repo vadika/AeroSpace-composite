@@ -4,6 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 CONFIG_FILE="${CONFIG_FILE:-$ROOT_DIR/composite.env}"
 WORK_DIR="${WORK_DIR:-$ROOT_DIR/.state/work}"
+SOURCE_DIR="$WORK_DIR/AeroSpace"
 
 if ! test -f "$CONFIG_FILE"; then
     echo "Missing config file: $CONFIG_FILE" >&2
@@ -23,11 +24,11 @@ source "$CONFIG_FILE"
 set +u
 
 mkdir -p "$WORK_DIR"
-rm -rf "$WORK_DIR/source" "$WORK_DIR/out"
+rm -rf "$SOURCE_DIR" "$WORK_DIR/out"
 
-git clone --filter=blob:none --branch "$UPSTREAM_BRANCH" "$UPSTREAM_REPO" "$WORK_DIR/source"
+git clone --filter=blob:none --branch "$UPSTREAM_BRANCH" "$UPSTREAM_REPO" "$SOURCE_DIR"
 
-cd "$WORK_DIR/source"
+cd "$SOURCE_DIR"
 
 git config user.name "AeroSpace Composite Bot"
 git config user.email "actions@users.noreply.github.com"
@@ -82,7 +83,7 @@ fi
 mkdir -p "$WORK_DIR/out"
 
 zip_name="AeroSpace-v${build_version}.zip"
-zip_path="$WORK_DIR/source/.release/$zip_name"
+zip_path="$SOURCE_DIR/.release/$zip_name"
 asset_url="https://github.com/${GITHUB_REPOSITORY}/releases/download/${release_tag}/${zip_name}"
 
 "$ROOT_DIR/scripts/build-cask.sh" \
