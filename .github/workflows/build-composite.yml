@@ -1,0 +1,30 @@
+name: build-composite
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: '*/15 * * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-composite
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Make scripts executable
+        run: chmod +x scripts/*.sh
+
+      - name: Build and publish composite release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: ./scripts/release-composite.sh
