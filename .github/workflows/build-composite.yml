@@ -21,6 +21,18 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - name: Checkout upstream for CI helper scripts
+        uses: actions/checkout@v6
+        with:
+          repository: nikitabobko/AeroSpace
+          path: upstream
+
+      - name: Select supported Xcode
+        run: ./upstream/.github/gh-actions-runner-xcode-select.sh
+
+      - name: Install release build dependencies
+        run: brew install bash fish xcbeautify swiftly
+
       - name: Make scripts executable
         run: chmod +x scripts/*.sh
 
