@@ -58,7 +58,7 @@ First remove official casks if installed:
 brew uninstall --cask aerospace aerospace-dev 2>/dev/null || true
 ```
 
-Then open Releases and use latest cask asset:
+Then open Releases and download latest `aerospace-composite.rb`:
 
 ```bash
 https://github.com/vadika/AeroSpace-composite/releases
@@ -70,10 +70,11 @@ If you already downloaded latest `aerospace-composite.rb` locally:
 brew install --cask ./aerospace-composite.rb
 ```
 
-If you want remote install instead of a downloaded file, use latest release tag from Releases page:
+Or download + install in one go:
 
 ```bash
-brew install --cask https://github.com/vadika/AeroSpace-composite/releases/download/<tag>/aerospace-composite.rb
+curl -LO https://github.com/vadika/AeroSpace-composite/releases/download/<tag>/aerospace-composite.rb
+brew install --cask ./aerospace-composite.rb
 ```
 
 ## GitHub setup
