@@ -41,20 +41,20 @@ cask "$cask_name" do
   depends_on macos: ">= :ventura"
 
   postflight do
-    system "xattr", "-d", "com.apple.quarantine", "\#{staged_path}/$zip_root_dir/bin/aerospace"
-    system "xattr", "-d", "com.apple.quarantine", "\#{appdir}/AeroSpace.app"
+    system "xattr", "-d", "com.apple.quarantine", "#{staged_path}/$zip_root_dir/bin/aerospace"
+    system "xattr", "-d", "com.apple.quarantine", "#{appdir}/AeroSpace.app"
   end
 
   app "$zip_root_dir/AeroSpace.app"
   binary "$zip_root_dir/bin/aerospace"
 
   binary "$zip_root_dir/shell-completion/zsh/_aerospace",
-      target: "\#{HOMEBREW_PREFIX}/share/zsh/site-functions/_aerospace"
+      target: "#{HOMEBREW_PREFIX}/share/zsh/site-functions/_aerospace"
   binary "$zip_root_dir/shell-completion/bash/aerospace",
-      target: "\#{HOMEBREW_PREFIX}/etc/bash_completion.d/aerospace"
+      target: "#{HOMEBREW_PREFIX}/etc/bash_completion.d/aerospace"
   binary "$zip_root_dir/shell-completion/fish/aerospace.fish",
-      target: "\#{HOMEBREW_PREFIX}/share/fish/vendor_completions.d/aerospace.fish"
+      target: "#{HOMEBREW_PREFIX}/share/fish/vendor_completions.d/aerospace.fish"
 
-  Dir["\#{staged_path}/$zip_root_dir/manpage/*"].each { |man| manpage man }
+  Dir["#{staged_path}/$zip_root_dir/manpage/*"].each { |man| manpage man }
 end
 EOF
