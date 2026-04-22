@@ -138,6 +138,17 @@ gh release create "$release_tag" \
     --title "AeroSpace composite ${state_id}" \
     --notes-file "$WORK_DIR/out/release-notes.md"
 
+mkdir -p "$ROOT_DIR/Casks"
+cp "$WORK_DIR/out/${CASK_NAME}.rb" "$ROOT_DIR/Casks/${CASK_NAME}.rb"
+
+if ! git -C "$ROOT_DIR" diff --quiet -- "Casks/${CASK_NAME}.rb"; then
+    git -C "$ROOT_DIR" config user.name "AeroSpace Composite Bot"
+    git -C "$ROOT_DIR" config user.email "actions@users.noreply.github.com"
+    git -C "$ROOT_DIR" add "Casks/${CASK_NAME}.rb"
+    git -C "$ROOT_DIR" commit -m "Update tap cask for ${release_tag}"
+    git -C "$ROOT_DIR" push origin HEAD:main
+fi
+
 if test -n "${GITHUB_OUTPUT:-}"; then
     printf 'release_tag=%s\n' "$release_tag" >> "$GITHUB_OUTPUT"
     printf 'build_version=%s\n' "$build_version" >> "$GITHUB_OUTPUT"

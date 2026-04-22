@@ -50,7 +50,7 @@ CASK_NAME=aerospace-composite
 Download:
 
 - the zip asset directly from Releases
-- or the generated cask file and install it with Homebrew:
+- or install from this repository as Homebrew tap:
 
 First remove official casks if installed:
 
@@ -58,23 +58,26 @@ First remove official casks if installed:
 brew uninstall --cask aerospace aerospace-dev 2>/dev/null || true
 ```
 
-Then open Releases and download latest `aerospace-composite.rb`:
+Tap install:
+
+```bash
+brew tap vadika/aerospace-composite https://github.com/vadika/AeroSpace-composite
+brew install --cask vadika/aerospace-composite/aerospace-composite
+```
+
+Releases page:
 
 ```bash
 https://github.com/vadika/AeroSpace-composite/releases
 ```
 
-If you already downloaded latest `aerospace-composite.rb` locally:
-
-```bash
-brew install --cask ./aerospace-composite.rb
-```
-
-Or download + install in one go:
+If you want manual install from release assets:
 
 ```bash
 curl -LO https://github.com/vadika/AeroSpace-composite/releases/download/<tag>/aerospace-composite.rb
-brew install --cask ./aerospace-composite.rb
+brew tap vadika/aerospace-composite https://github.com/vadika/AeroSpace-composite
+cp ./aerospace-composite.rb "$(brew --repository)/Library/Taps/vadika/homebrew-aerospace-composite/Casks/aerospace-composite.rb"
+brew reinstall --cask vadika/aerospace-composite/aerospace-composite
 ```
 
 ## GitHub setup
