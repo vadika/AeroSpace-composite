@@ -6,8 +6,7 @@ cask "aerospace-composite" do
   name "AeroSpace"
   desc "Composite test build of AeroSpace"
   homepage "https://github.com/nikitabobko/AeroSpace"
-  conflicts_with cask: "aerospace"
-  conflicts_with cask: "aerospace-dev"
+  conflicts_with cask: ["aerospace", "aerospace-dev"]
 
   depends_on macos: ">= :ventura"
 
