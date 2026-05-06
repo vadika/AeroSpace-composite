@@ -71,7 +71,7 @@ if test "${#selected_prs[@]}" -gt 0; then
         build_version_suffix="${build_version_suffix}+PR${pr}"
     done
 fi
-build_version="0.0.0-SNAPSHOT${build_version_suffix}"
+build_version="0.0.0-SNAPSHOT.${state_id}${build_version_suffix}"
 
 if gh release view "$release_tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
     echo "Release $release_tag already exists for this composite state."

@@ -29,7 +29,7 @@ zip_root_dir="AeroSpace-v$build_version"
 
 cat <<EOF
 cask "$cask_name" do
-  version :latest
+  version "$build_version"
   sha256 "$sha"
 
   url "$asset_url"
