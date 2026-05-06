@@ -1,8 +1,8 @@
 cask "aerospace-composite" do
   version :latest
-  sha256 "a5459cc2f430fb1f39ed6257c9028e464635cc13cefb8220c71a80d77520c797"
+  sha256 "1b2a59a0de2722c22cd8bb69d63ce18ea8c8ee016c89ef0f05bb337298b55c1f"
 
-  url "https://github.com/vadika/AeroSpace-composite/releases/download/aerospace-testing-bb19be91cd10/AeroSpace-v0.0.0-SNAPSHOT+PR2057+PR2062.zip"
+  url "https://github.com/vadika/AeroSpace-composite/releases/download/aerospace-testing-fcb93a4b0665/AeroSpace-v0.0.0-SNAPSHOT+PR2057+PR2062.zip"
   name "AeroSpace"
   desc "Composite test build of AeroSpace"
   homepage "https://github.com/nikitabobko/AeroSpace"
