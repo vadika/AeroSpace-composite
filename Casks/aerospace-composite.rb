@@ -8,7 +8,7 @@ cask "aerospace-composite" do
   homepage "https://github.com/nikitabobko/AeroSpace"
   conflicts_with cask: ["aerospace", "aerospace-dev"]
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   postflight do
     system "xattr", "-d", "com.apple.quarantine", "#{staged_path}/AeroSpace-v0.0.0-SNAPSHOT.6b318811387d+PR2057+PR2062/bin/aerospace"
