@@ -44,7 +44,13 @@ declare -a pr_states=()
 declare -a pr_notes=()
 
 for pr in "${selected_prs[@]}"; do
-    git fetch origin "pull/$pr/head:refs/remotes/origin/pr/$pr"
+    # ponytail: retry fetch — pull/N/head races force-pushes and GitHub ref lag ("not our ref"); 3 tries covers it
+    n=0
+    until git fetch origin "pull/$pr/head:refs/remotes/origin/pr/$pr"; do
+        n=$((n + 1))
+        test "$n" -ge 3 && { echo "Failed to fetch PR #$pr head after $n attempts." >&2; exit 1; }
+        sleep 5
+    done
     pr_sha="$(git rev-parse "refs/remotes/origin/pr/$pr")"
     pr_short="$(git rev-parse --short=12 "$pr_sha")"
     pr_states+=("pr${pr}-${pr_short}")
