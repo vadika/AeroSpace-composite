@@ -63,6 +63,14 @@ for pr in "${selected_prs[@]}"; do
     fi
 done
 
+# ponytail: local fixups for integration breaks the merge itself can't catch (e.g. non-exhaustive switch on a PR's new enum case). git apply fails loud if a patch goes stale.
+shopt -s nullglob
+for patch in "$ROOT_DIR"/patches/*.patch; do
+    echo "Applying $(basename "$patch")"
+    git apply "$patch"
+done
+shopt -u nullglob
+
 state_parts=("main-${main_short}")
 if test "${#pr_states[@]}" -gt 0; then
     state_parts+=("${pr_states[@]}")
