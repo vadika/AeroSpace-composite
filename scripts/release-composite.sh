@@ -63,13 +63,17 @@ for pr in "${selected_prs[@]}"; do
     fi
 done
 
-# ponytail: local fixups for integration breaks the merge itself can't catch (e.g. non-exhaustive switch on a PR's new enum case). git apply fails loud if a patch goes stale.
+# ponytail: local fixups for integration breaks the merge itself can't catch (e.g. non-exhaustive switch on a PR's new enum case). git apply fails loud if a patch goes stale. Commit them so build-release.sh's clean-tree check passes.
 shopt -s nullglob
-for patch in "$ROOT_DIR"/patches/*.patch; do
+patches=("$ROOT_DIR"/patches/*.patch)
+shopt -u nullglob
+for patch in "${patches[@]}"; do
     echo "Applying $(basename "$patch")"
     git apply "$patch"
 done
-shopt -u nullglob
+if test "${#patches[@]}" -gt 0; then
+    git commit -am "Apply composite integration patches"
+fi
 
 state_parts=("main-${main_short}")
 if test "${#pr_states[@]}" -gt 0; then
