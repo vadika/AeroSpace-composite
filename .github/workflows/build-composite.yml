@@ -31,7 +31,7 @@ jobs:
         run: ./upstream/.github/gh-actions-runner-xcode-select.sh
 
       - name: Install release build dependencies
-        run: brew install bash fish xcbeautify swiftly
+        run: brew update && brew install bash fish xcbeautify swiftly
 
       - name: Initialize swiftly
         run: cd upstream && swiftly init --skip-install --assume-yes --verbose && swiftly install
