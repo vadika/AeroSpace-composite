@@ -38,11 +38,15 @@ cask "$cask_name" do
   homepage "$homepage"
   conflicts_with cask: ["aerospace", "aerospace-dev"]
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
-  postflight do
-    system "xattr", "-d", "com.apple.quarantine", "#{staged_path}/$zip_root_dir/bin/aerospace"
-    system "xattr", "-d", "com.apple.quarantine", "#{appdir}/AeroSpace.app"
+  postflight_steps do
+    run "/usr/bin/xattr",
+        args: ["-d", "com.apple.quarantine", "{{staged_path}}/$zip_root_dir/bin/aerospace"],
+        must_succeed: false
+    run "/usr/bin/xattr",
+        args: ["-d", "com.apple.quarantine", "{{appdir}}/AeroSpace.app"],
+        must_succeed: false
   end
 
   app "$zip_root_dir/AeroSpace.app"

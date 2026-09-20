@@ -8,11 +8,15 @@ cask "aerospace-composite" do
   homepage "https://github.com/nikitabobko/AeroSpace"
   conflicts_with cask: ["aerospace", "aerospace-dev"]
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
-  postflight do
-    system "xattr", "-d", "com.apple.quarantine", "#{staged_path}/AeroSpace-v0.0.0-SNAPSHOT.18269542d1ca+PR2057+PR2062/bin/aerospace"
-    system "xattr", "-d", "com.apple.quarantine", "#{appdir}/AeroSpace.app"
+  postflight_steps do
+    run "/usr/bin/xattr",
+        args: ["-d", "com.apple.quarantine", "{{staged_path}}/AeroSpace-v0.0.0-SNAPSHOT.18269542d1ca+PR2057+PR2062/bin/aerospace"],
+        must_succeed: false
+    run "/usr/bin/xattr",
+        args: ["-d", "com.apple.quarantine", "{{appdir}}/AeroSpace.app"],
+        must_succeed: false
   end
 
   app "AeroSpace-v0.0.0-SNAPSHOT.18269542d1ca+PR2057+PR2062/AeroSpace.app"
