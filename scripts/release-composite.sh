@@ -26,7 +26,7 @@ set +u
 mkdir -p "$WORK_DIR"
 rm -rf "$SOURCE_DIR" "$WORK_DIR/out"
 
-git clone --filter=blob:none --branch "$UPSTREAM_BRANCH" "$UPSTREAM_REPO" "$SOURCE_DIR"
+git clone --branch "$UPSTREAM_BRANCH" "$UPSTREAM_REPO" "$SOURCE_DIR"
 
 cd "$SOURCE_DIR"
 
