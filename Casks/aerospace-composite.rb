@@ -1,8 +1,8 @@
 cask "aerospace-composite" do
-  version "0.0.0-SNAPSHOT.3cb3b9f09dbf+PR2057+PR2062"
-  sha256 "02b20696a8ddbf089f3bae84198e238dca4b9650d3f134f2584cd47af81ec214"
+  version "0.0.0-SNAPSHOT.e5e7c0601d13+PR2057+PR2062"
+  sha256 "92b5ef8606a6ee12ff210434e527a1ebd630d19cadb9c03fd9dc0ef53263e66d"
 
-  url "https://github.com/vadika/AeroSpace-composite/releases/download/aerospace-testing-3cb3b9f09dbf/AeroSpace-v0.0.0-SNAPSHOT.3cb3b9f09dbf+PR2057+PR2062.zip"
+  url "https://github.com/vadika/AeroSpace-composite/releases/download/aerospace-testing-e5e7c0601d13/AeroSpace-v0.0.0-SNAPSHOT.e5e7c0601d13+PR2057+PR2062.zip"
   name "AeroSpace"
   desc "Composite test build of AeroSpace"
   homepage "https://github.com/nikitabobko/AeroSpace"
@@ -12,22 +12,22 @@ cask "aerospace-composite" do
 
   postflight_steps do
     run "/usr/bin/xattr",
-        args: ["-d", "com.apple.quarantine", "{{staged_path}}/AeroSpace-v0.0.0-SNAPSHOT.3cb3b9f09dbf+PR2057+PR2062/bin/aerospace"],
+        args: ["-d", "com.apple.quarantine", "{{staged_path}}/AeroSpace-v0.0.0-SNAPSHOT.e5e7c0601d13+PR2057+PR2062/bin/aerospace"],
         must_succeed: false
     run "/usr/bin/xattr",
         args: ["-d", "com.apple.quarantine", "{{appdir}}/AeroSpace.app"],
         must_succeed: false
   end
 
-  app "AeroSpace-v0.0.0-SNAPSHOT.3cb3b9f09dbf+PR2057+PR2062/AeroSpace.app"
-  binary "AeroSpace-v0.0.0-SNAPSHOT.3cb3b9f09dbf+PR2057+PR2062/bin/aerospace"
+  app "AeroSpace-v0.0.0-SNAPSHOT.e5e7c0601d13+PR2057+PR2062/AeroSpace.app"
+  binary "AeroSpace-v0.0.0-SNAPSHOT.e5e7c0601d13+PR2057+PR2062/bin/aerospace"
 
-  binary "AeroSpace-v0.0.0-SNAPSHOT.3cb3b9f09dbf+PR2057+PR2062/shell-completion/zsh/_aerospace",
+  binary "AeroSpace-v0.0.0-SNAPSHOT.e5e7c0601d13+PR2057+PR2062/shell-completion/zsh/_aerospace",
       target: "#{HOMEBREW_PREFIX}/share/zsh/site-functions/_aerospace"
-  binary "AeroSpace-v0.0.0-SNAPSHOT.3cb3b9f09dbf+PR2057+PR2062/shell-completion/bash/aerospace",
+  binary "AeroSpace-v0.0.0-SNAPSHOT.e5e7c0601d13+PR2057+PR2062/shell-completion/bash/aerospace",
       target: "#{HOMEBREW_PREFIX}/etc/bash_completion.d/aerospace"
-  binary "AeroSpace-v0.0.0-SNAPSHOT.3cb3b9f09dbf+PR2057+PR2062/shell-completion/fish/aerospace.fish",
+  binary "AeroSpace-v0.0.0-SNAPSHOT.e5e7c0601d13+PR2057+PR2062/shell-completion/fish/aerospace.fish",
       target: "#{HOMEBREW_PREFIX}/share/fish/vendor_completions.d/aerospace.fish"
 
-  Dir["#{staged_path}/AeroSpace-v0.0.0-SNAPSHOT.3cb3b9f09dbf+PR2057+PR2062/manpage/*"].each { |man| manpage man }
+  Dir["#{staged_path}/AeroSpace-v0.0.0-SNAPSHOT.e5e7c0601d13+PR2057+PR2062/manpage/*"].each { |man| manpage man }
 end
